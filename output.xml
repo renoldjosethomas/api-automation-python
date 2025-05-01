@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2 (Python 3.9.6 on darwin)" generated="2025-05-01T18:32:54.079525" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Cases" source="/Users/renoldthomas/Documents/work/git-projects/api-automation/test_cases">
+<suite id="s1-s1" name="TestProfile" source="/Users/renoldthomas/Documents/work/git-projects/api-automation/test_cases/TestProfile.robot">
+<test id="s1-s1-t1" name="TEST_1: Get profile details and see the response" line="14">
+<kw name="Get Profile" owner="ProfileService">
+<msg time="2025-05-01T18:32:54.156271" level="INFO">Performing GET request to fetch profile details</msg>
+<msg time="2025-05-01T18:32:55.900092" level="INFO">404</msg>
+<arg>${profile_uuid}</arg>
+<doc>This API is used for fetching profile details using the profile_uuid</doc>
+<status status="PASS" start="2025-05-01T18:32:54.156102" elapsed="1.744827"/>
+</kw>
+<tag>smoke</tag>
+<status status="PASS" start="2025-05-01T18:32:54.155259" elapsed="1.746423"/>
+</test>
+<status status="PASS" start="2025-05-01T18:32:54.095188" elapsed="1.807762"/>
+</suite>
+<status status="PASS" start="2025-05-01T18:32:54.080758" elapsed="1.823587"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">smoke</stat>
+</tag>
+<suite>
+<stat name="Test Cases" id="s1" pass="1" fail="0" skip="0">Test Cases</stat>
+<stat name="TestProfile" id="s1-s1" pass="1" fail="0" skip="0">Test Cases.TestProfile</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
