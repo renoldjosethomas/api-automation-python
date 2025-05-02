@@ -1,21 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2 (Python 3.9.6 on darwin)" generated="2025-05-02T11:11:36.292782" rpa="false" schemaversion="5">
+<robot generator="Robot 7.2 (Python 3.9.6 on darwin)" generated="2025-05-02T15:37:42.877699" rpa="false" schemaversion="5">
 <suite id="s1" name="Test Cases" source="/Users/renoldthomas/Documents/work/git-projects/api-automation-python/test_cases">
 <suite id="s1-s1" name="TestProfile" source="/Users/renoldthomas/Documents/work/git-projects/api-automation-python/test_cases/TestProfile.robot">
-<test id="s1-s1-t1" name="TEST_1: Get profile details and see the response" line="14">
+<test id="s1-s1-t1" name="TEST_2 Get profile details and see the response" line="24">
 <kw name="Get Profile" owner="ProfileService">
-<msg time="2025-05-02T11:11:36.407904" level="INFO">Performing GET request to fetch profile details</msg>
-<msg time="2025-05-02T11:11:37.734572" level="INFO">404</msg>
-<arg>${profile_uuid}</arg>
+<msg time="2025-05-02T15:37:42.920491" level="INFO">Performing GET request to fetch profile details</msg>
+<msg time="2025-05-02T15:37:44.174286" level="INFO">200</msg>
+<msg time="2025-05-02T15:37:44.174626" level="INFO">{
+        "profile_uuid": "12acdc34-68b3-4465-9344-48cc5d2d6274",
+        "profile_name": "profile_2",
+        "postal_code": "K2C 3H1",
+        "country": "CA",
+        "first_name": "Samantha",
+        "last_name": "Nguyen",
+        "phone": "16135551234",
+        "email": "samantha.nguyen@example.ca",
+        "created_at": "2025-05-02T13:06:21.000000Z"
+    }</msg>
+<msg time="2025-05-02T15:37:44.175146" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${profile_uuid_get}</arg>
 <doc>This API is used for fetching profile details using the profile_uuid</doc>
-<status status="PASS" start="2025-05-02T11:11:36.407810" elapsed="1.327487"/>
+<status status="PASS" start="2025-05-02T15:37:42.920390" elapsed="1.254865"/>
+</kw>
+<kw name="Convert To Integer">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-05-02T15:37:44.177987" level="INFO">${int_value} = 200</msg>
+<var>${int_value}</var>
+<arg>int(${value})</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-05-02T15:37:44.177490" elapsed="0.000536"/>
+</kw>
+<return>
+<value>${int_value}</value>
+<status status="PASS" start="2025-05-02T15:37:44.178131" elapsed="0.000097"/>
+</return>
+<msg time="2025-05-02T15:37:44.178532" level="INFO">${status_code_200} = 200</msg>
+<var>${status_code_200}</var>
+<arg>200</arg>
+<status status="PASS" start="2025-05-02T15:37:44.176461" elapsed="0.002103"/>
+</kw>
+<kw name="Verify Get Profile" owner="ProfileService">
+<msg time="2025-05-02T15:37:44.179207" level="INFO">Performing validation for create profile response</msg>
+<msg time="2025-05-02T15:37:44.179289" level="INFO">{
+        "profile_uuid": "12acdc34-68b3-4465-9344-48cc5d2d6274",
+        "profile_name": "profile_2",
+        "postal_code": "K2C 3H1",
+        "country": "CA",
+        "first_name": "Samantha",
+        "last_name": "Nguyen",
+        "phone": "16135551234",
+        "email": "samantha.nguyen@example.ca",
+        "created_at": "2025-05-02T13:06:21.000000Z"
+    }</msg>
+<msg time="2025-05-02T15:37:44.179326" level="INFO">======================</msg>
+<msg time="2025-05-02T15:37:44.179361" level="INFO">&lt;class 'bool'&gt;</msg>
+<msg time="2025-05-02T15:37:44.179417" level="INFO">Validating Positive Case - Get Profile</msg>
+<msg time="2025-05-02T15:37:44.179509" level="INFO">{'profile_uuid': '12acdc34-68b3-4465-9344-48cc5d2d6274', 'profile_name': 'profile_2', 'postal_code': 'K2C 3H1', 'country': 'CA', 'first_name': 'Samantha', 'last_name': 'Nguyen', 'phone': '16135551234', 'email': 'samantha.nguyen@example.ca', 'created_at': '2025-05-02T13:06:21.000000Z'}</msg>
+<msg time="2025-05-02T15:37:44.179550" level="INFO">Key validation - profile_name successfully. Expected: profile_2, Actual: profile_2</msg>
+<msg time="2025-05-02T15:37:44.179582" level="INFO">Key validation - first_name successfully. Expected: Samantha, Actual: Samantha</msg>
+<msg time="2025-05-02T15:37:44.179612" level="INFO">Key validation - last_name successfully. Expected: Nguyen, Actual: Nguyen</msg>
+<msg time="2025-05-02T15:37:44.179644" level="INFO">Key validation - phone successfully. Expected: 16135551234, Actual: 16135551234</msg>
+<msg time="2025-05-02T15:37:44.179674" level="INFO">Key validation - postal_code successfully. Expected: K2C 3H1, Actual: K2C 3H1</msg>
+<arg>${response}</arg>
+<arg>${False}</arg>
+<arg>${status_code_200}</arg>
+<arg>profile_name=profile_2</arg>
+<arg>first_name=Samantha</arg>
+<arg>last_name=Nguyen</arg>
+<arg>phone=16135551234</arg>
+<arg>postal_code=K2C 3H1</arg>
+<doc>This API is used for validating create profile request</doc>
+<status status="PASS" start="2025-05-02T15:37:44.178834" elapsed="0.000901"/>
 </kw>
 <tag>smoke</tag>
-<status status="PASS" start="2025-05-02T11:11:36.407316" elapsed="1.328671"/>
+<status status="PASS" start="2025-05-02T15:37:42.919880" elapsed="1.260152"/>
 </test>
-<status status="PASS" start="2025-05-02T11:11:36.311372" elapsed="1.425850"/>
+<status status="PASS" start="2025-05-02T15:37:42.886336" elapsed="1.294438"/>
 </suite>
-<status status="PASS" start="2025-05-02T11:11:36.293299" elapsed="1.445172"/>
+<status status="PASS" start="2025-05-02T15:37:42.878520" elapsed="1.303056"/>
 </suite>
 <statistics>
 <total>

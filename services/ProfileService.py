@@ -1,8 +1,10 @@
 import json
 import requests
+import unittest
 
 from robot.api import logger
 from requests.auth import HTTPBasicAuth
+from robot.libraries.BuiltIn import BuiltIn
 
 
 class ProfileService:
@@ -35,16 +37,94 @@ class ProfileService:
         logger.info("Performing GET request to fetch profile details")
 
         # Make the HTTP GET request using requests
-        url = self.api_basepath + "/profile/" + profile_uuid
+        url = self.api_basepath + "/profile/" + profile_uuid + "/"
         
         # Use authentication in the headers (if needed for authentication)
         response = requests.get(url, auth=HTTPBasicAuth(self.user1_auth_id, self.user1_auth_token))
         
-        logger.info(response.status_code )
+        logger.info(response.status_code)
+        logger.info(response.text)
+
+        return response
+        
+
+    def verify_get_profile(self, response, is_negative, exp_status_code, **kwargs):
+        """
+        This API is used for validating create profile request
+
+        :param profile_data: profile data required for validation
+        """
+
+        logger.info("Performing validation for create profile response", also_console=True)
+        logger.info(response.text)
+
+        logger.info("======================")
+        logger.info(type(is_negative))
+
+        # Status Code Assertion - Basic
+        assert exp_status_code == response.status_code, "Expected: {}, Actual: {}".format(exp_status_code, response.status_code)
+
+        # Positive Validation Logic
+        if is_negative is False and response.status_code == 200:
+            logger.info("Validating Positive Case - Get Profile")
+            profile_data = response.json()
+            logger.info(profile_data)
+            
+            for key in kwargs:
+                if key in profile_data:
+                    assert profile_data[key] == kwargs[key], "Key - '{}' does not match. Expected: {}, Actual: {}".format(key, kwargs[key],profile_data[key])   
+                    logger.info("Key validation - {} successfully. Expected: {}, Actual: {}".format(key, kwargs[key],profile_data[key]))  
+                else:
+                    logger.error("Key - {} not found in profile_data".format(key))
+                    BuiltIn().fail("Key - {} not found in profile_data".format(key))
+        elif is_negative is True:
+            # Negative Validation Logic Comes Here
+            logger.info("Validating Negative Case - Get Profile")
+        else:
+            logger.fail(f"Error: {response.status_code} - {response.text}")
+
+
+
+    def create_profile(self, **kwargs):
+        """
+        This API is used for fetching profile details using the profile_uuid
+
+        :param profile_uuid: The UUID of the profile to fetch
+        """
+
+        logger.info("Performing GET request to fetch profile details")
+
+        # Make the HTTP GET request using requests
+        url = self.api_basepath + "/profile/"
+        json_data = json.dumps(kwargs)
+        
+        # Use authentication in the headers (if needed for authentication)
+        response = requests.post(url, auth=HTTPBasicAuth(self.user1_auth_id, self.user1_auth_token, data=json_data, headers={"Content-Type": "application/json"}))
+        
+        logger.info(response.status_code)
         
         # Check if the request was successful
         if response.status_code == 200:
             logger.info(response.content)
             return response.json()  # Return the JSON response if successful
         else:
-            return f"Error: {response.status_code} - {response.text}"  # Handle error response
+            BuiltIn.fail(f"Error: {response.status_code} - {response.text}")
+
+    
+    def verify_create_profile(self, profile_data, **kwargs):
+        """
+        This API is used for validating create profile request
+
+        :param profile_data: profile data required for validation
+        """
+
+        logger.info("Performing validation for create profile response", also_console=True)
+        logger.info(profile_data)
+
+        for key in kwargs:
+            if key in profile_data:
+                assert profile_data[key] == kwargs[key], "Key - '{}' does not match. Expected: {}, Actual: {}".format(key, kwargs[key],profile_data[key])   
+                logger.info("Key validation - {} successfully. Expected: {}, Actual: {}".format(key, kwargs[key],profile_data[key]))  
+            else:
+                logger.error("Key {} not found in profile_data".format(key))
+                return False
