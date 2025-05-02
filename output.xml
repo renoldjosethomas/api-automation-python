@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2 (Python 3.9.6 on darwin)" generated="2025-05-01T18:32:54.079525" rpa="false" schemaversion="5">
-<suite id="s1" name="Test Cases" source="/Users/renoldthomas/Documents/work/git-projects/api-automation/test_cases">
-<suite id="s1-s1" name="TestProfile" source="/Users/renoldthomas/Documents/work/git-projects/api-automation/test_cases/TestProfile.robot">
+<robot generator="Robot 7.2 (Python 3.9.6 on darwin)" generated="2025-05-02T11:11:36.292782" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Cases" source="/Users/renoldthomas/Documents/work/git-projects/api-automation-python/test_cases">
+<suite id="s1-s1" name="TestProfile" source="/Users/renoldthomas/Documents/work/git-projects/api-automation-python/test_cases/TestProfile.robot">
 <test id="s1-s1-t1" name="TEST_1: Get profile details and see the response" line="14">
 <kw name="Get Profile" owner="ProfileService">
-<msg time="2025-05-01T18:32:54.156271" level="INFO">Performing GET request to fetch profile details</msg>
-<msg time="2025-05-01T18:32:55.900092" level="INFO">404</msg>
+<msg time="2025-05-02T11:11:36.407904" level="INFO">Performing GET request to fetch profile details</msg>
+<msg time="2025-05-02T11:11:37.734572" level="INFO">404</msg>
 <arg>${profile_uuid}</arg>
 <doc>This API is used for fetching profile details using the profile_uuid</doc>
-<status status="PASS" start="2025-05-01T18:32:54.156102" elapsed="1.744827"/>
+<status status="PASS" start="2025-05-02T11:11:36.407810" elapsed="1.327487"/>
 </kw>
 <tag>smoke</tag>
-<status status="PASS" start="2025-05-01T18:32:54.155259" elapsed="1.746423"/>
+<status status="PASS" start="2025-05-02T11:11:36.407316" elapsed="1.328671"/>
 </test>
-<status status="PASS" start="2025-05-01T18:32:54.095188" elapsed="1.807762"/>
+<status status="PASS" start="2025-05-02T11:11:36.311372" elapsed="1.425850"/>
 </suite>
-<status status="PASS" start="2025-05-01T18:32:54.080758" elapsed="1.823587"/>
+<status status="PASS" start="2025-05-02T11:11:36.293299" elapsed="1.445172"/>
 </suite>
 <statistics>
 <total>
