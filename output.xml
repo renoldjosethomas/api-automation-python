@@ -1,95 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2 (Python 3.9.6 on darwin)" generated="2025-05-02T15:37:42.877699" rpa="false" schemaversion="5">
+<robot generator="Robot 7.2 (Python 3.9.6 on darwin)" generated="2025-05-05T00:55:28.433691" rpa="false" schemaversion="5">
 <suite id="s1" name="Test Cases" source="/Users/renoldthomas/Documents/work/git-projects/api-automation-python/test_cases">
 <suite id="s1-s1" name="TestProfile" source="/Users/renoldthomas/Documents/work/git-projects/api-automation-python/test_cases/TestProfile.robot">
-<test id="s1-s1-t1" name="TEST_2 Get profile details and see the response" line="24">
+<test id="s1-s1-t1" name="Print User Data" line="13">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-05T00:55:28.512878" level="INFO">Full user data: {'auth_id': 'xxxxxx', 'auth_token': 'yyyyyyy', 'profile': {'create': '149c3016-6c1a-41d8-8c2e-0b6bd1f570d2', 'get': '12acdc34-68b3-4465-9344-48cc5d2d6274', 'update': 'fa8ecff1-41fd-41d5-b9a2-8473553c54e6', 'delete': '3e57cbfa-0a29-4427-99d3-32d2cb6d0c7a'}}</msg>
+<arg>Full user data: ${renauto1}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-05T00:55:28.512726" elapsed="0.000202"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-05T00:55:28.513167" level="INFO">Profile UUID: 12acdc34-68b3-4465-9344-48cc5d2d6274</msg>
+<arg>Profile UUID: ${profile_uuid_get}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-05T00:55:28.513057" elapsed="0.000146"/>
+</kw>
+<tag>smoke</tag>
+<status status="PASS" start="2025-05-05T00:55:28.511928" elapsed="0.001378"/>
+</test>
+<test id="s1-s1-t2" name="TEST_1 Create profile details and see the response" line="18">
+<kw name="Create Profile" owner="ProfileService">
+<msg time="2025-05-05T00:55:28.513969" level="INFO">Performing POST request to create a profile</msg>
+<msg time="2025-05-05T00:55:28.514006" level="INFO">https://renold.free.beeceptor.com/profile/</msg>
+<msg time="2025-05-05T00:55:29.650744" level="INFO">200</msg>
+<msg time="2025-05-05T00:55:29.650944" level="INFO">{
+        "profile_uuid": "149c3016-6c1a-41d8-8c2e-0b6bd1f570d2",
+        "profile_name": "profile_1",
+        "postal_code": "98136",
+        "country": "US",
+        "first_name": "David",
+        "last_name": "Harris",
+        "phone": "14152671237",
+        "email": "davidharris@example.com",
+        "created_at": "2025-05-02T13:06:21.000000Z"
+    }</msg>
+<msg time="2025-05-05T00:55:29.651274" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>profile_name=profile_1</arg>
+<arg>first_name=David</arg>
+<arg>last_name=Harris</arg>
+<arg>phone=14152671237</arg>
+<arg>country=US</arg>
+<arg>postal_code=98136</arg>
+<arg>email=davidharris@example.com</arg>
+<doc>This API is used for creating a profile</doc>
+<status status="PASS" start="2025-05-05T00:55:28.513738" elapsed="1.137594"/>
+</kw>
+<kw name="Verify Create Profile" owner="ProfileService">
+<msg time="2025-05-05T00:55:29.652355" level="INFO">Performing validation for create profile response</msg>
+<msg time="2025-05-05T00:55:29.652531" level="INFO">{'profile_uuid': '149c3016-6c1a-41d8-8c2e-0b6bd1f570d2', 'profile_name': 'profile_1', 'postal_code': '98136', 'country': 'US', 'first_name': 'David', 'last_name': 'Harris', 'phone': '14152671237', 'email': 'davidharris@example.com', 'created_at': '2025-05-02T13:06:21.000000Z'}</msg>
+<msg time="2025-05-05T00:55:29.652570" level="INFO">Key validation - profile_name successfully. Expected: profile_1, Actual: profile_1</msg>
+<msg time="2025-05-05T00:55:29.652600" level="INFO">Key validation - first_name successfully. Expected: David, Actual: David</msg>
+<msg time="2025-05-05T00:55:29.652627" level="INFO">Key validation - last_name successfully. Expected: Harris, Actual: Harris</msg>
+<msg time="2025-05-05T00:55:29.652650" level="INFO">Key validation - phone successfully. Expected: 14152671237, Actual: 14152671237</msg>
+<msg time="2025-05-05T00:55:29.652675" level="INFO">Key validation - postal_code successfully. Expected: 98136, Actual: 98136</msg>
+<arg>${response}</arg>
+<arg>profile_name=profile_1</arg>
+<arg>first_name=David</arg>
+<arg>last_name=Harris</arg>
+<arg>phone=14152671237</arg>
+<arg>postal_code=98136</arg>
+<doc>This API is used for validating create profile request</doc>
+<status status="PASS" start="2025-05-05T00:55:29.651903" elapsed="0.000832"/>
+</kw>
+<tag>smoke</tag>
+<status status="PASS" start="2025-05-05T00:55:28.513457" elapsed="1.139567"/>
+</test>
+<test id="s1-s1-t3" name="TEST_2 Get profile details and see the response" line="23">
 <kw name="Get Profile" owner="ProfileService">
-<msg time="2025-05-02T15:37:42.920491" level="INFO">Performing GET request to fetch profile details</msg>
-<msg time="2025-05-02T15:37:44.174286" level="INFO">200</msg>
-<msg time="2025-05-02T15:37:44.174626" level="INFO">{
+<msg time="2025-05-05T00:55:29.654230" level="INFO">Performing GET request to fetch profile details</msg>
+<msg time="2025-05-05T00:55:29.654261" level="INFO">https://renold.free.beeceptor.com/profile/12acdc34-68b3-4465-9344-48cc5d2d6274/</msg>
+<msg time="2025-05-05T00:55:30.722507" level="INFO">200</msg>
+<msg time="2025-05-05T00:55:30.722759" level="INFO">{
         "profile_uuid": "12acdc34-68b3-4465-9344-48cc5d2d6274",
         "profile_name": "profile_2",
         "postal_code": "K2C 3H1",
         "country": "CA",
         "first_name": "Samantha",
-        "last_name": "Nguyen",
+        "last_name": "Prabhu",
         "phone": "16135551234",
-        "email": "samantha.nguyen@example.ca",
+        "email": "samantha.prabhu@example.ca",
         "created_at": "2025-05-02T13:06:21.000000Z"
     }</msg>
-<msg time="2025-05-02T15:37:44.175146" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2025-05-05T00:55:30.723148" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>${profile_uuid_get}</arg>
 <doc>This API is used for fetching profile details using the profile_uuid</doc>
-<status status="PASS" start="2025-05-02T15:37:42.920390" elapsed="1.254865"/>
-</kw>
-<kw name="Convert To Integer">
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-05-02T15:37:44.177987" level="INFO">${int_value} = 200</msg>
-<var>${int_value}</var>
-<arg>int(${value})</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-05-02T15:37:44.177490" elapsed="0.000536"/>
-</kw>
-<return>
-<value>${int_value}</value>
-<status status="PASS" start="2025-05-02T15:37:44.178131" elapsed="0.000097"/>
-</return>
-<msg time="2025-05-02T15:37:44.178532" level="INFO">${status_code_200} = 200</msg>
-<var>${status_code_200}</var>
-<arg>200</arg>
-<status status="PASS" start="2025-05-02T15:37:44.176461" elapsed="0.002103"/>
+<status status="PASS" start="2025-05-05T00:55:29.653954" elapsed="1.069276"/>
 </kw>
 <kw name="Verify Get Profile" owner="ProfileService">
-<msg time="2025-05-02T15:37:44.179207" level="INFO">Performing validation for create profile response</msg>
-<msg time="2025-05-02T15:37:44.179289" level="INFO">{
+<msg time="2025-05-05T00:55:30.725358" level="INFO">Performing validation for create profile response</msg>
+<msg time="2025-05-05T00:55:30.726338" level="INFO">{
         "profile_uuid": "12acdc34-68b3-4465-9344-48cc5d2d6274",
         "profile_name": "profile_2",
         "postal_code": "K2C 3H1",
         "country": "CA",
         "first_name": "Samantha",
-        "last_name": "Nguyen",
+        "last_name": "Prabhu",
         "phone": "16135551234",
-        "email": "samantha.nguyen@example.ca",
+        "email": "samantha.prabhu@example.ca",
         "created_at": "2025-05-02T13:06:21.000000Z"
     }</msg>
-<msg time="2025-05-02T15:37:44.179326" level="INFO">======================</msg>
-<msg time="2025-05-02T15:37:44.179361" level="INFO">&lt;class 'bool'&gt;</msg>
-<msg time="2025-05-02T15:37:44.179417" level="INFO">Validating Positive Case - Get Profile</msg>
-<msg time="2025-05-02T15:37:44.179509" level="INFO">{'profile_uuid': '12acdc34-68b3-4465-9344-48cc5d2d6274', 'profile_name': 'profile_2', 'postal_code': 'K2C 3H1', 'country': 'CA', 'first_name': 'Samantha', 'last_name': 'Nguyen', 'phone': '16135551234', 'email': 'samantha.nguyen@example.ca', 'created_at': '2025-05-02T13:06:21.000000Z'}</msg>
-<msg time="2025-05-02T15:37:44.179550" level="INFO">Key validation - profile_name successfully. Expected: profile_2, Actual: profile_2</msg>
-<msg time="2025-05-02T15:37:44.179582" level="INFO">Key validation - first_name successfully. Expected: Samantha, Actual: Samantha</msg>
-<msg time="2025-05-02T15:37:44.179612" level="INFO">Key validation - last_name successfully. Expected: Nguyen, Actual: Nguyen</msg>
-<msg time="2025-05-02T15:37:44.179644" level="INFO">Key validation - phone successfully. Expected: 16135551234, Actual: 16135551234</msg>
-<msg time="2025-05-02T15:37:44.179674" level="INFO">Key validation - postal_code successfully. Expected: K2C 3H1, Actual: K2C 3H1</msg>
+<msg time="2025-05-05T00:55:30.726609" level="INFO">&lt;class 'bool'&gt;</msg>
+<msg time="2025-05-05T00:55:30.726661" level="INFO">Validating Positive Case - Get Profile</msg>
+<msg time="2025-05-05T00:55:30.726754" level="INFO">{'profile_uuid': '12acdc34-68b3-4465-9344-48cc5d2d6274', 'profile_name': 'profile_2', 'postal_code': 'K2C 3H1', 'country': 'CA', 'first_name': 'Samantha', 'last_name': 'Prabhu', 'phone': '16135551234', 'email': 'samantha.prabhu@example.ca', 'created_at': '2025-05-02T13:06:21.000000Z'}</msg>
+<msg time="2025-05-05T00:55:30.726802" level="INFO">Key validation - profile_name successfully. Expected: profile_2, Actual: profile_2</msg>
+<msg time="2025-05-05T00:55:30.726874" level="INFO">Key validation - first_name successfully. Expected: Samantha, Actual: Samantha</msg>
+<msg time="2025-05-05T00:55:30.726909" level="INFO">Key validation - last_name successfully. Expected: Prabhu, Actual: Prabhu</msg>
+<msg time="2025-05-05T00:55:30.726943" level="INFO">Key validation - phone successfully. Expected: 16135551234, Actual: 16135551234</msg>
+<msg time="2025-05-05T00:55:30.726976" level="INFO">Key validation - postal_code successfully. Expected: K2C 3H1, Actual: K2C 3H1</msg>
+<msg time="2025-05-05T00:55:30.727011" level="INFO">Key validation - email successfully. Expected: samantha.prabhu@example.ca, Actual: samantha.prabhu@example.ca</msg>
 <arg>${response}</arg>
 <arg>${False}</arg>
-<arg>${status_code_200}</arg>
+<arg>${200}</arg>
 <arg>profile_name=profile_2</arg>
 <arg>first_name=Samantha</arg>
-<arg>last_name=Nguyen</arg>
+<arg>last_name=Prabhu</arg>
 <arg>phone=16135551234</arg>
 <arg>postal_code=K2C 3H1</arg>
+<arg>email=samantha.prabhu@example.ca</arg>
 <doc>This API is used for validating create profile request</doc>
-<status status="PASS" start="2025-05-02T15:37:44.178834" elapsed="0.000901"/>
+<status status="PASS" start="2025-05-05T00:55:30.723965" elapsed="0.003144"/>
 </kw>
+<tag>sanity</tag>
 <tag>smoke</tag>
-<status status="PASS" start="2025-05-02T15:37:42.919880" elapsed="1.260152"/>
+<status status="PASS" start="2025-05-05T00:55:29.653382" elapsed="1.074297"/>
 </test>
-<status status="PASS" start="2025-05-02T15:37:42.886336" elapsed="1.294438"/>
+<test id="s1-s1-t4" name="TEST_3 Get profile details and see the response - Validation failure sample" line="28">
+<kw name="Get Profile" owner="ProfileService">
+<msg time="2025-05-05T00:55:30.729936" level="INFO">Performing GET request to fetch profile details</msg>
+<msg time="2025-05-05T00:55:30.730097" level="INFO">https://renold.free.beeceptor.com/profile/12acdc34-68b3-4465-9344-48cc5d2d6274/</msg>
+<msg time="2025-05-05T00:55:31.799472" level="INFO">200</msg>
+<msg time="2025-05-05T00:55:31.799696" level="INFO">{
+        "profile_uuid": "12acdc34-68b3-4465-9344-48cc5d2d6274",
+        "profile_name": "profile_2",
+        "postal_code": "K2C 3H1",
+        "country": "CA",
+        "first_name": "Samantha",
+        "last_name": "Prabhu",
+        "phone": "16135551234",
+        "email": "samantha.prabhu@example.ca",
+        "created_at": "2025-05-02T13:06:21.000000Z"
+    }</msg>
+<msg time="2025-05-05T00:55:31.800089" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${profile_uuid_get}</arg>
+<doc>This API is used for fetching profile details using the profile_uuid</doc>
+<status status="PASS" start="2025-05-05T00:55:30.729492" elapsed="1.070680"/>
+</kw>
+<kw name="Verify Get Profile" owner="ProfileService">
+<msg time="2025-05-05T00:55:31.801980" level="INFO">Performing validation for create profile response</msg>
+<msg time="2025-05-05T00:55:31.802097" level="INFO">{
+        "profile_uuid": "12acdc34-68b3-4465-9344-48cc5d2d6274",
+        "profile_name": "profile_2",
+        "postal_code": "K2C 3H1",
+        "country": "CA",
+        "first_name": "Samantha",
+        "last_name": "Prabhu",
+        "phone": "16135551234",
+        "email": "samantha.prabhu@example.ca",
+        "created_at": "2025-05-02T13:06:21.000000Z"
+    }</msg>
+<msg time="2025-05-05T00:55:31.802143" level="INFO">&lt;class 'bool'&gt;</msg>
+<msg time="2025-05-05T00:55:31.802178" level="INFO">Validating Positive Case - Get Profile</msg>
+<msg time="2025-05-05T00:55:31.802258" level="INFO">{'profile_uuid': '12acdc34-68b3-4465-9344-48cc5d2d6274', 'profile_name': 'profile_2', 'postal_code': 'K2C 3H1', 'country': 'CA', 'first_name': 'Samantha', 'last_name': 'Prabhu', 'phone': '16135551234', 'email': 'samantha.prabhu@example.ca', 'created_at': '2025-05-02T13:06:21.000000Z'}</msg>
+<msg time="2025-05-05T00:55:31.802303" level="INFO">Key validation - profile_name successfully. Expected: profile_2, Actual: profile_2</msg>
+<msg time="2025-05-05T00:55:31.802337" level="INFO">Key validation - first_name successfully. Expected: Samantha, Actual: Samantha</msg>
+<msg time="2025-05-05T00:55:31.802534" level="FAIL">Key - 'last_name' does not match. Expected: Joseph, Actual: Prabhu</msg>
+<arg>${response}</arg>
+<arg>is_negative=${False}</arg>
+<arg>exp_status_code=${200}</arg>
+<arg>profile_name=profile_2</arg>
+<arg>first_name=Samantha</arg>
+<arg>last_name=Joseph</arg>
+<arg>phone=16135551234</arg>
+<arg>postal_code="K2C 3H1"</arg>
+<doc>This API is used for validating create profile request</doc>
+<status status="FAIL" start="2025-05-05T00:55:31.800853" elapsed="0.004620">Key - 'last_name' does not match. Expected: Joseph, Actual: Prabhu</status>
+</kw>
+<tag>sanity</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2025-05-05T00:55:30.728499" elapsed="1.077512">Key - 'last_name' does not match. Expected: Joseph, Actual: Prabhu</status>
+</test>
+<status status="FAIL" start="2025-05-05T00:55:28.449428" elapsed="3.357445"/>
 </suite>
-<status status="PASS" start="2025-05-02T15:37:42.878520" elapsed="1.303056"/>
+<status status="FAIL" start="2025-05-05T00:55:28.434936" elapsed="3.372745"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="3" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="0" skip="0">smoke</stat>
+<stat pass="1" fail="1" skip="0">sanity</stat>
+<stat pass="3" fail="1" skip="0">smoke</stat>
 </tag>
 <suite>
-<stat name="Test Cases" id="s1" pass="1" fail="0" skip="0">Test Cases</stat>
-<stat name="TestProfile" id="s1-s1" pass="1" fail="0" skip="0">Test Cases.TestProfile</stat>
+<stat name="Test Cases" id="s1" pass="3" fail="1" skip="0">Test Cases</stat>
+<stat name="TestProfile" id="s1-s1" pass="3" fail="1" skip="0">Test Cases.TestProfile</stat>
 </suite>
 </statistics>
 <errors>

@@ -22,9 +22,9 @@
         "postal_code": "K2C 3H1",
         "country": "CA",
         "first_name": "Samantha",
-        "last_name": "Nguyen",
+        "last_name": "Prabhu",
         "phone": "16135551234",
-        "email": "samantha.nguyen@example.ca",
+        "email": "samantha.prabhu@example.ca",
         "created_at": "2025-05-02T13:06:21.000000Z"
     },
     {
