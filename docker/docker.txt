@@ -2,7 +2,7 @@
 # To Setup and Get Started
 
 ## Build Image - Provide Dockerfile path
-docker build r robot-image ./docker/
+docker build --no-cache -t robot-image ./docker/
 
 ## Run Container
 docker run exec -it robot-image
