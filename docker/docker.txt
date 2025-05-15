@@ -4,9 +4,9 @@
 ## Build Image - Provide Dockerfile path
 docker build --no-cache -t robot-image ./docker/
 
-## Run Container
-docker run exec -it robot-image
+## Run Container by mounting local to docker container (Useful for copying output files)
+docker run --rm -v $(pwd)/output/:/ren_docker_app/api-automation-python/output/ robot-image
 
-## Run Container and Copy output file and delete container
-docker run --rm -v $(pwd):/log.html robot-image
+## Run Container - Normal
+docker run --name robot-container robot-image
 
