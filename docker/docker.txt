@@ -1,0 +1,12 @@
+
+# To Setup and Get Started
+
+## Build Image - Provide Dockerfile path
+docker build r robot-image ./docker/
+
+## Run Container
+docker run exec -it robot-image
+
+## Run Container and Copy output file and delete container
+docker run --rm -v $(pwd):/log.html robot-image
+
